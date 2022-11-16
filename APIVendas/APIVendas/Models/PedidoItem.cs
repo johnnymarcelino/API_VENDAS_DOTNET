@@ -1,4 +1,7 @@
-﻿namespace APIVendas.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace APIVendas.Models
 {
     public class PedidoItem : BaseModel
     {
@@ -7,6 +10,10 @@
         public decimal Valor_Unitario { get; set; }
         public ProdutoRequest Produto { get; set; }
 
+        internal List<Pedido> ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

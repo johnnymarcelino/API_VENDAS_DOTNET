@@ -19,13 +19,15 @@ namespace APIVendas.Mapper
 
         public static ProdutoResponse Mapper(Produto produto)  // mapeando o produto e retornando response
         {
-            return new ProdutoResponse()
-            {
-                Id = produto.Id.ToString(),
-                Descricao = produto.Descricao.ToString(),
-                Estoque = produto.Estoque.ToString(),
-                Valor = produto.Valor.ToString()
-            };
+            return new ProdutoResponse();
+
+            //return new ProdutoResponse()
+            //{
+            //    Id = produto.Id.ToString(),
+            //    Descricao = produto.Descricao.ToString(),
+            //    Estoque = produto.Estoque.ToString(),
+            //    Valor = produto.Valor.ToString()
+            //};
         }
     }
 }

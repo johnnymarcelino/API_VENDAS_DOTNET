@@ -10,6 +10,7 @@ namespace APIVendas.Repositories
 {
     public static class BaseRepository
     {
+        public const string ConnectionString = "Server=.\\sqlexpress;Database=Vendas;Trusted_Connection=True;";
         public static List<T> QuerySql<T>(string sql, object parameter = null)
         {
             List<T> orderDetail;
