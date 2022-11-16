@@ -1,4 +1,6 @@
-﻿using APIVendas.Models;
+﻿using APIVendas.Mapper;
+using APIVendas.Models;
+using APIVendas.Requests;
 using APIVendas.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,10 +13,10 @@ namespace APIVendas.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ClienteController : ControllerBase
+    public class ClienteRequestController : ControllerBase
     {
         [HttpGet]  // retorna para o navegador 
-        public ActionResult<List<Cliente>> Get()
+        public ActionResult<List<ClienteResponse>> Get()
         {
             var cliente = new Cliente()
             {
@@ -32,29 +34,30 @@ namespace APIVendas.Controllers
                 DT_Nascimento = DateTime.Now.AddYears(-27)
             };
 
-            var clientes = new List<Cliente>();
-            clientes.Add(cliente);
-            clientes.Add(cliente2);
-            return clientes;
+            var clientesResponse = new List<ClienteResponse>();
+            clientesResponse.Add(ClienteMapper.Mapper(cliente));
+            clientesResponse.Add(ClienteMapper.Mapper(cliente2));
+            return clientesResponse;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Cliente> Get(string id)
+        public ActionResult<ClienteResponse> Get(string id)
         {
-            var cliente = new Cliente()
+            var ClienteResponse = new ClienteResponse()
             {
-                Id = 3,
+                Id = "3",
                 Nome = "Johnny",
                 Email = "johnny@email.com",
-                DT_Nascimento = DateTime.Now.AddYears(-20)
+                DT_Nascimento = DateTime.Now.AddYears(-20).ToString()
             };
 
-            return cliente;
+            return ClienteResponse;
         }
 
         [HttpPost]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Post([FromBody] Cliente request)
+        public ActionResult<ReturnResponse> Post([FromBody] ClienteRequest request)
         {
+            var meuNovoCliente = ClienteMapper.Mapper(request);  // transformando para o tipo Cliente (class)
             var retorno = new ReturnResponse()
             {
                 Code = 200,
@@ -65,7 +68,7 @@ namespace APIVendas.Controllers
         }
 
         [HttpPut]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Put([FromBody] Cliente request)  // vem no corpo da requisição
+        public ActionResult<ReturnResponse> Put([FromBody] ClienteRequest request)  // vem no corpo da requisição
         {
             var retorno = new ReturnResponse()
             {

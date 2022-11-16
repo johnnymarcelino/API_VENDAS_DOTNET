@@ -11,51 +11,51 @@ namespace APIVendas.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PedidoController : ControllerBase
+    public class PedidoRequestController : ControllerBase
     {
         [HttpGet]  // retorna para o navegador 
-        public ActionResult<List<Pedido>> Get()
+        public ActionResult<List<PedidoResponse>> Get()
         {
-            var pedido = new Pedido()
+            var pedido = new PedidoResponse()
             {
-                Nr_Pedido = 1,
-                Cliente = new Cliente(),
-                DT_Pedido = DateTime.Now,
-                Tipo = "V",
-                Itens = new List<PedidoItem>()
+                Nr_Pedido = "1",
+                Cliente = new Cliente().ToString(),
+                DT_Pedido = DateTime.Now.ToString(),
+                Tipo = "Vermelho",
+                Itens = new List<PedidoItemRequest>().ToString()
             };
 
-            var pedido2 = new Pedido() {
-                Nr_Pedido = 1,
-                Cliente = new Cliente(),
-                DT_Pedido = DateTime.Now,
-                Tipo = "V",
-                Itens = new List<PedidoItem>()
+            var pedido2 = new PedidoResponse() {
+                Nr_Pedido = "2",
+                Cliente = new Cliente().ToString(),
+                DT_Pedido = DateTime.Now.ToString(),
+                Tipo = "Azul",
+                Itens = new List<PedidoItemRequest>().ToString()
             };
 
-            var pedidos = new List<Pedido>();
+            var pedidos = new List<PedidoResponse>();
             pedidos.Add(pedido);
             pedidos.Add(pedido2);
             return pedidos;
         }
 
         [HttpGet("{nr_pedido}")]
-        public ActionResult<Pedido> Get(string nr_pedido)
+        public ActionResult<PedidoResponse> Get(string nr_pedido)
         {
-            var pedido = new Pedido()
+            var pedido = new PedidoResponse()
             {
-                Nr_Pedido = 3,
-                Cliente = new Cliente(),
-                DT_Pedido = DateTime.Now,
+                Nr_Pedido = "3",
+                Cliente = new Cliente().ToString(),
+                DT_Pedido = DateTime.Now.ToString(),
                 Tipo = "Diagonal",
-                Itens = new List<PedidoItem>()
+                Itens = new List<PedidoItemRequest>().ToString()
             };
 
             return pedido;
         }
 
         [HttpPost]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Post([FromBody] Pedido request)
+        public ActionResult<ReturnResponse> Post([FromBody] PedidoRequest request)
         {
             var retorno = new ReturnResponse()
             {
@@ -67,7 +67,7 @@ namespace APIVendas.Controllers
         }
 
         [HttpPut]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Put([FromBody] Pedido request)  // vem no corpo da requisição
+        public ActionResult<ReturnResponse> Put([FromBody] PedidoRequest request)  // vem no corpo da requisição
         {
             var retorno = new ReturnResponse()
             {

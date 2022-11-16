@@ -9,61 +9,61 @@ namespace APIVendas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class ProdutoRequestController : ControllerBase
     {
         [HttpGet]  // retorna para o navegador 
-        public ActionResult<List<Produto>> Get()
+        public ActionResult<List<ProdutoResponse>> Get()
         {
-            var produto = new Produto()
+            var produto = new ProdutoResponse()
             {
-                Id = 1,
+                Id = "1",
                 Descricao = "Notebook",
-                Estoque = 2,
-                Valor = 2499
+                Estoque = "2",
+                Valor = "2999"
             };
 
-            var produto2 = new Produto()
+            var produto2 = new ProdutoResponse()
             {
-                Id = 2,
+                Id = "2",
                 Descricao = "Mouse",
-                Estoque = 10,
-                Valor = 50
+                Estoque = "10",
+                Valor = "50"
             };
 
-            var produtos = new List<Produto>();
+            var produtos = new List<ProdutoResponse>();
             produtos.Add(produto);
             produtos.Add(produto2);
             return produtos;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Produto> Get(string id)
+        public ActionResult<ProdutoResponse> Get(string id)
         {
-            var produto = new Produto()
+            var produto = new ProdutoResponse()
             {
-                Id = 3,
+                Id = "3",
                 Descricao = "Teclado",
-                Estoque = 25,
-                Valor = 80
+                Estoque = "25",
+                Valor = "80"
             };
 
             return produto;
         }
 
         [HttpPost]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Post([FromBody] Produto request)
+        public ActionResult<ReturnResponse> Post([FromBody] ProdutoRequest request)
         {
             var retorno = new ReturnResponse()
             {
                 Code = 200,
-                Message = "Registro cadastrado com sucesso!"
+                Message = $"Registro {request} cadastrado com sucesso!"
             };
 
             return retorno;
         }
 
         [HttpPut]  // somente no corpo da requisição - formato JSON
-        public ActionResult<ReturnResponse> Put([FromBody] Produto request)  // vem no corpo da requisição
+        public ActionResult<ReturnResponse> Put([FromBody] ProdutoRequest request)  // vem no corpo da requisição
         {
             var retorno = new ReturnResponse()
             {
