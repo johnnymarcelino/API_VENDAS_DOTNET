@@ -2,7 +2,7 @@
 
 namespace APIVendas.Models
 {
-    public class Cliente
+    public class Cliente : BaseModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }

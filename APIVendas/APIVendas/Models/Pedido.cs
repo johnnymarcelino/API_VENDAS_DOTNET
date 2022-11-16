@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace APIVendas.Models
 {
-    public class PedidoRequest
+    public class Pedido : BaseModel
     {
         public int Nr_Pedido { get; set; }
         public DateTime DT_Pedido { get; set; }

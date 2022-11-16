@@ -1,7 +1,11 @@
-﻿namespace APIVendas.Models
+﻿using Dapper.Contrib.Extensions;
+
+namespace APIVendas.Models
 {
-    public class ProdutoRequest
+    [Table("produto")]  // declaração da tabela prduto
+    public class Produto : BaseModel
     {
+        [ExplicitKey]  // passar valores de forma manual
         public int Id { get; set; }
         public string Descricao { get; set; }
         public int Estoque { get; set; }
