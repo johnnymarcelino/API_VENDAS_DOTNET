@@ -20,7 +20,7 @@ namespace APIVendas.Controllers
             var pedido = new PedidoResponse()
             {
                 Nr_Pedido = "1",
-                Cliente = new Cliente().ToString(),
+                Cliente = new Produto().ToString(),
                 DT_Pedido = DateTime.Now.ToString(),
                 Tipo = "Vermelho",
                 Itens = new List<PedidoItemRequest>().ToString()
@@ -28,7 +28,7 @@ namespace APIVendas.Controllers
 
             var pedido2 = new PedidoResponse() {
                 Nr_Pedido = "2",
-                Cliente = new Cliente().ToString(),
+                Cliente = new Produto().ToString(),
                 DT_Pedido = DateTime.Now.ToString(),
                 Tipo = "Azul",
                 Itens = new List<PedidoItemRequest>().ToString()
@@ -46,7 +46,7 @@ namespace APIVendas.Controllers
             var pedido = new PedidoResponse()
             {
                 Nr_Pedido = "3",
-                Cliente = new Cliente().ToString(),
+                Cliente = new Produto().ToString(),
                 DT_Pedido = DateTime.Now.ToString(),
                 Tipo = "Diagonal",
                 Itens = new List<PedidoItemRequest>().ToString()

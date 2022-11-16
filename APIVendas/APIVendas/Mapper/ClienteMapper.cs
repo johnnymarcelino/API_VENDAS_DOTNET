@@ -4,7 +4,7 @@ using APIVendas.Responses;
 
 namespace APIVendas.Mapper
 {
-    public static class ClienteMapper
+    public static class ProdutoeMapper
     {
         public static Cliente Mapper(ClienteRequest clienteRequest)
         {

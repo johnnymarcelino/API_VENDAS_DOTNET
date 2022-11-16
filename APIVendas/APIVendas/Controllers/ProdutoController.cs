@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using APIVendas.Repositories;
 using System.Linq;
+using APIVendas.Mapper;
 
 namespace APIVendas.Controllers
 {
@@ -14,7 +15,7 @@ namespace APIVendas.Controllers
     public class ProdutoRequestController : ControllerBase
     {
         [HttpGet]  // retorna para o navegador 
-        public ActionResult<List<Produto>> Get()
+        public ActionResult<List<ProdutoResponse>> Get()
         {
             //var produto = new ProdutoResponse()
             //{
@@ -32,7 +33,10 @@ namespace APIVendas.Controllers
             //    Valor = "50"
             //};
 
-            return ProdutoRepository.Buscar(0, "");
+            var produtos = ProdutoRepository.Buscar().Select(p=> ProdutoMapper.Mapper(p));
+            return produtos.ToList();
+
+            //return ProdutoRepository.Buscar(0, descricao);
 
             //var produtos = new List<ProdutoResponse>();
             //produtos.Add(produto);
@@ -41,7 +45,7 @@ namespace APIVendas.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Produto> Get(int id)
+        public ActionResult<ProdutoResponse> Get(int id)
         {
             //var produto = new ProdutoResponse()
             //{
@@ -53,13 +57,17 @@ namespace APIVendas.Controllers
 
             //return produto;
 
-            return ProdutoRepository.Buscar(id).FirstOrDefault();
+            var produto = ProdutoMapper.Mapper(ProdutoRepository.Buscar(id).FirstOrDefault());
+            return produto;
 
         }
 
         [HttpPost]  // somente no corpo da requisição - formato JSON
         public ActionResult<ReturnResponse> Post([FromBody] ProdutoRequest request)
         {
+            var produto = ProdutoMapper.Mapper(request);
+            ProdutoRepository.Atualizar(produto);
+
             var retorno = new ReturnResponse()
             {
                 Code = 200,
@@ -72,6 +80,9 @@ namespace APIVendas.Controllers
         [HttpPut]  // somente no corpo da requisição - formato JSON
         public ActionResult<ReturnResponse> Put([FromBody] ProdutoRequest request)  // vem no corpo da requisição
         {
+            var produto = ProdutoMapper.Mapper(request);
+            ProdutoRepository.Atualizar(produto);
+
             var retorno = new ReturnResponse()
             {
                 Code = 200,

@@ -35,8 +35,8 @@ namespace APIVendas.Controllers
             };
 
             var clientesResponse = new List<ClienteResponse>();
-            clientesResponse.Add(ClienteMapper.Mapper(cliente));
-            clientesResponse.Add(ClienteMapper.Mapper(cliente2));
+            clientesResponse.Add(ProdutoeMapper.Mapper(cliente));
+            clientesResponse.Add(ProdutoeMapper.Mapper(cliente2));
             return clientesResponse;
         }
 
@@ -57,7 +57,7 @@ namespace APIVendas.Controllers
         [HttpPost]  // somente no corpo da requisição - formato JSON
         public ActionResult<ReturnResponse> Post([FromBody] ClienteRequest request)
         {
-            var meuNovoCliente = ClienteMapper.Mapper(request);  // transformando para o tipo Cliente (class)
+            var meuNovoCliente = ProdutoeMapper.Mapper(request);  // transformando para o tipo Cliente (class)
             var retorno = new ReturnResponse()
             {
                 Code = 200,
